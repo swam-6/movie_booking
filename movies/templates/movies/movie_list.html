@@ -1,0 +1,23 @@
+{% extends 'movies/base.html' %}
+
+{% block title %}Available Movies{% endblock %}
+
+{% block content %}
+<h2>Available Movies</h2>
+
+{% if movies %}
+    <div class="movie-grid">
+        {% for movie in movies %}
+        <div class="movie-card">
+            <h3>{{ movie.title }}</h3>
+            <p><strong>Description:</strong> {{ movie.description }}</p>
+            <p><strong>Duration:</strong> {{ movie.duration }} minutes</p>
+            <p><strong>Show Time:</strong> {{ movie.show_time|date:"F d, Y - g:i A" }}</p>
+            <a href="{% url 'booking_form' movie.id %}" class="btn">Book Tickets</a>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No movies available right now. Please check back later!</p>
+{% endif %}
+{% endblock %}

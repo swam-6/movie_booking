@@ -1,0 +1,21 @@
+{% extends 'movies/base.html' %}
+
+{% block title %}Book Tickets - {{ movie.title }}{% endblock %}
+
+{% block content %}
+<h2>Book Tickets for {{ movie.title }}</h2>
+
+<div class="movie-card" style="max-width: 600px;">
+    <p><strong>Description:</strong> {{ movie.description }}</p>
+    <p><strong>Duration:</strong> {{ movie.duration }} minutes</p>
+    <p><strong>Show Time:</strong> {{ movie.show_time|date:"F d, Y - g:i A" }}</p>
+</div>
+
+<h3>Booking Details</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn">Confirm Booking</button>
+    <a href="{% url 'movie_list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
